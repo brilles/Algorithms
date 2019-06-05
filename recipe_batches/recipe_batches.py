@@ -12,7 +12,6 @@ def recipe_batches(recipe, ingredients):
         max_produce_max = max_produce
     except: 
       return 0
-  print("---------")
   return max_produce_max
 
 if __name__ == '__main__':
