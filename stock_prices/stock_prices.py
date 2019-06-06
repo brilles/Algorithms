@@ -3,41 +3,38 @@
 import argparse
 
 def find_max_profit(prices):
-
   """
-    INPUT: a list of stock prices
-    OUTPUT: the maximum profit that can be made from a single buy and sell
+  INPUT: a list of stock prices
+  OUTPUT: the MAX profit that can be made from a single buy and single sell
   """
 
-  # invalid input coverage
+  # input coverage
   if len(prices) < 2:
-    return "You must enter at least 2 prices"
-  # input is valid
-  else: 
-    # init varst
-    profit = None
-    smallest = prices[0]
-    smallestIndex = 0
-    largestIndex = 0
-    largest = 0
+    return "Must enter at least 2 prices"
+  
+  # Init vars
+  buy =  1000000
+  sell = 0
+  buy_index = 0
+  sell_index = 0
+  max_profit = 0
 
-    for i in range(0, len(prices) - 1):
-      if prices[i] < smallest:
-        smallest = prices[i]
-        smallestIndex = i
-    for i in range(smallestIndex, len(prices) - 1):
-      if prices[i] > largest:
-        largest = prices[i]
-        largestIndex = i
+  # iterate over prices
+  for i in range(0, len(prices)):
 
-    # calculate diff
-    print("LARGEST", largestIndex, largest, prices)
-    print("SMALLEST", smallestIndex, smallest, prices)
-    
-    profit = largest - smallest
-    if smallestIndex > largestIndex:
-      return profit * -1
-    return profit
+    # find lowest price in list, note the index (can buy the last one either, bc then you coudn't sell!)
+    if prices[i] < buy and i != len(prices) - 1:
+      buy = prices[i]
+      buy_index = i
+
+    # find highest price in list after the buy list
+    if prices[i] > sell and i > buy_index:
+      sell = prices[i]
+      sell_index = i
+      
+  max_profit = sell - buy
+
+  return max_profit
 
 if __name__ == '__main__':
   # This is just some code to accept inputs from the command line
@@ -46,5 +43,3 @@ if __name__ == '__main__':
   args = parser.parse_args()
   print(args)
   print("A profit of ${profit} can be made from the stock prices {prices}.".format(profit=find_max_profit(args.integers), prices=args.integers))
-
-# print(find_max_profit([1050, 270, 1540, 3800, 2])) #should return 3530
