@@ -2,17 +2,6 @@
 
 import sys
 
-# The cache parameter is here for if you want to implement
-# a solution that is more efficient than the naive 
-# recursive solution
-# def eating_cookies(n, cache=None):
-#   if n == 0:
-#     return 1;
-#   if n <= 2: 
-#     return n
-#   else:
-#     return (n) + eating_cookies(n-1) - 1/3
-
 cache = {0: 1, 1: 1, 2: 2} # memoization
 
 def eating_cookies(n, nothing=None):
